@@ -54,6 +54,15 @@ header {
   min-height: 100px;
 }
 
+#inputArea{
+  padding-left: 38%;
+  height: 40px;
+  padding-bottom: 5px;
+  display:none;
+
+}
+
+
 .card-footer {
   text-align: center;
 }
