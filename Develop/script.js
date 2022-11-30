@@ -14,7 +14,7 @@ function writePassword() {
   var spChar = prompt("include special characters?");
   var upperChar = prompt("include capitals?");
 
-  //
+  //changing values to true or false
    if (spChar === "yes"){
     spChar = true;
   }else{
@@ -43,43 +43,53 @@ function writePassword() {
 }
 
 function generatePassword(l, spChar, num, caps){
+
+  //charsets for numbers and special characters
   var charset = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
   var nmCharset = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","1","2","3","4","5","6","7","8","9","0"];
   var spCharset = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","!","@","#","$","%","^","&","*","(",")","-","_","=","+","[","{","]","}","/","|","~","]",",","<",".",">","?"];
   var spnmCharset = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","!","@","#","$","%","^","&","*","(",")","-","_","=","+","[","{","]","}","/","|","~","]",",","<",".",">","?","1","2","3","4","5","6","7","8","9","0"];
   
-  t = [];
+
+  //setting the current charset
+  currentCharset = [];
   if(num == true && spChar == true){
-    t = spnmCharset;
+    currentCharset = spnmCharset;
   }else if (num == true && spChar == false){
     console.log("numonly");
-    t = nmCharset;
+    currentCharste = nmCharset;
 
   }else if (num == false && spChar == true){
-    t = spCharset
+    currentCharset = spCharset
     console.log("spOnly")
   }else{
-    t = charset
+    currentCharset = charset
   }
+
+  // password array
   password = [];
 
+  //loop for randomly picking characters from the current charset
   for(var i = 0; i<l; i++){
-    rand = Math.random()* t.length;
-    randChar = t[Math.round(rand)];
+    rand = Math.random()* currentCharset.length;
+    randChar = currentCharset[Math.round(rand)];
     randCaps = (Math.random() * 2) + 1;
 
+    //logic for adding capitals
     if(randCaps > 2 && caps == true){
       console.log(randChar);
       
+      //checking if the random character is part of the letters charset
       if (charset.indexOf(randChar) !== -1){
         randChar = randChar.toUpperCase();
       }
     }
+    //pushing the character to the password array
     password.push(randChar);
     
   }
   
-
+  //joins the characters in the password array with no space in between
   return password.join("");
 
 }
