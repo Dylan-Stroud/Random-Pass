@@ -12,6 +12,7 @@ function writePassword() {
   var numChar = prompt("How many characters in the password?");
   var numbers = prompt("include numbers?");
   var spChar = prompt("include special characters?");
+  var upperChar = prompt("include capitals?");
 
   //
    if (spChar === "yes"){
@@ -26,8 +27,14 @@ function writePassword() {
     numbers = false;
   }
 
+  if (upperChar === "yes"){
+    upperChar = true;
+  }else{
+    upperChar = false;
+  }
+
   
-  var password = generatePassword(numChar,spChar,numbers);
+  var password = generatePassword(numChar,spChar,numbers,upperChar);
   
   var passwordText = document.querySelector("#password");
 
@@ -35,11 +42,12 @@ function writePassword() {
 
 }
 
-function generatePassword(l, spChar, num){
+function generatePassword(l, spChar, num, caps){
   var charset = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
   var nmCharset = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","1","2","3","4","5","6","7","8","9","0"];
   var spCharset = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","!","@","#","$","%","^","&","*","(",")","-","_","=","+","[","{","]","}","/","|","~","]",",","<",".",">","?"];
   var spnmCharset = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","!","@","#","$","%","^","&","*","(",")","-","_","=","+","[","{","]","}","/","|","~","]",",","<",".",">","?","1","2","3","4","5","6","7","8","9","0"];
+  
   t = [];
   if(num == true && spChar == true){
     t = spnmCharset;
@@ -58,6 +66,15 @@ function generatePassword(l, spChar, num){
   for(var i = 0; i<l; i++){
     rand = Math.random()* t.length;
     randChar = t[Math.round(rand)];
+    randCaps = (Math.random() * 2) + 1;
+
+    if(randCaps > 2 && caps == true){
+      console.log(randChar);
+      
+      if (charset.indexOf(randChar) !== -1){
+        randChar = randChar.toUpperCase();
+      }
+    }
     password.push(randChar);
     
   }
