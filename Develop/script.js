@@ -7,10 +7,21 @@ var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
+  var numChar = prompt("How many characters in the password?");
+  var spChar = prompt("include special characters?");
+  var numbers = prompt("include numbers?");
+  if (numbers === "yes"){
+    numbers = true;
+  }else{
+    numbers = false;
+  }
+  if (spChar === "yes"){
+    spChar = true;
+  }else{
+    spChar = false;
+  }
 
-  header.textContent = "How many characters?"
-  inputArea.style.display  = "flex";
-  generateBtn.addEventListener("characters", );
+  
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
